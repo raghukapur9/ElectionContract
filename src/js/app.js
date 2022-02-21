@@ -25,19 +25,12 @@ App = {
   initContract: function() {
     $.getJSON("Election.json", function(election) {
       // Instantiate a new truffle contract from the artifact
-      console.log(App)
-      console.log(App.contracts)
-      App.contracts.election = TruffleContract(election);
-      console.log(App.contracts.election)
-      console.log(App.web3Provider)
-      console.log(App.contracts.election.setProvider(App.web3Provider)
-      )
-      console.log("1111111")
+      App.contracts.Election = TruffleContract(election);
       // Connect provider to interact with contract
-      App.contracts.election.setProvider(App.web3Provider);
+      App.contracts.Election.setProvider(App.web3Provider);
 
       App.listenForEvents();
-      console.log("-----------")
+
       return App.render();
     });
   },
@@ -76,7 +69,7 @@ App = {
     });
 
     // Load contract data
-    App.contracts.election.deployed().then(function(instance) {
+    App.contracts.Election.deployed().then(function(instance) {
       electionInstance = instance;
       return electionInstance.candidatesCount();
     }).then(function(candidatesCount) {
